@@ -125,7 +125,7 @@ function showSection(name, instant = false) {
   document.querySelectorAll('.section').forEach(s => {
     s.classList.remove('active');
   });
-
+  i
   // Show target
   const target = document.getElementById('section-' + name);
   if (!target) return;
@@ -138,6 +138,10 @@ function showSection(name, instant = false) {
   if (instant) {
     setTimeout(() => target.style.animationDuration = '', 10);
   }
+
+   if(name === 'favorites'){
+renderFavorites();
+}
 
   // Update nav active state
   navBtns.forEach(btn => {
@@ -380,14 +384,27 @@ updateCartBadge();
 
 showSection("cart");
 
-}
+};
+document.getElementById("checkoutForm").addEventListener("submit",function(e){
+
+e.preventDefault();
+
+showToast("Order placed successfully 🎉");
+
+cart=[];
+persistCart();
+updateCartBadge();
+
+showSection("home");
+
+});
 
 
 // ── Checkout ──────────────────────────────────────────────────────
 function bindCheckout() {
   checkoutBtn.addEventListener('click', () => {
     if (cart.length === 0) return;
-    showToast('Checkout coming soon! 🚀');
+    showSection("checkout");
   });
 }
 
