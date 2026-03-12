@@ -178,6 +178,7 @@ function renderProducts() {
   grid.innerHTML = PRODUCTS.map(p => `
     <div class="product-card" data-id="${p.id}">
       <div class="product-img-wrap">
+  <button class="fav-btn" onclick="toggleFavorite(${p.id})">♡</button>
         <img src="${p.img}" alt="${p.name}" loading="lazy" onerror="this.src='https://via.placeholder.com/400x300/141416/8B5CF6?text=${encodeURIComponent(p.name)}'"/>
         <span class="product-tag tag-${p.tag}">${p.tagLabel}</span>
       </div>
