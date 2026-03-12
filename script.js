@@ -81,6 +81,7 @@ const PRODUCTS = [
 // ── State ─────────────────────────────────────────────────────────
 let cart = JSON.parse(localStorage.getItem('em_cart') || '[]');
 let currentSection = 'home';
+let favorites = JSON.parse(localStorage.getItem('em_favorites') || '[]');
 
 // ── DOM Refs ──────────────────────────────────────────────────────
 const navBtns      = document.querySelectorAll('.nav-btn[data-section]');
@@ -308,7 +309,23 @@ window.removeFromCart = function(id) {
   updateCartBadge();
   renderCart();
   showToast('Item removed from cart');
+
 };
+window.toggleFavorite = function(id){
+
+if(favorites.includes(id)){
+favorites = favorites.filter(f=>f!==id);
+showToast("Removed from favorites");
+}else{
+favorites.push(id);
+showToast("Added to favorites ❤️");
+}
+
+localStorage.setItem("em_favorites",JSON.stringify(favorites));
+renderProducts();
+
+}
+
 
 // ── Checkout ──────────────────────────────────────────────────────
 function bindCheckout() {
