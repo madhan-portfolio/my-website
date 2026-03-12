@@ -211,6 +211,42 @@ Buy Now
       </div>
     </div>
   `).join('');
+}
+function renderFavorites(){
+
+const grid = document.getElementById("favoritesGrid");
+
+const favProducts = PRODUCTS.filter(p=>favorites.includes(p.id));
+
+if(favProducts.length===0){
+grid.innerHTML="<p>No favorites yet</p>";
+return;
+}
+
+grid.innerHTML = favProducts.map(p=>`
+
+<div class="product-card">
+
+<div class="product-img-wrap">
+<img src="${p.img}">
+</div>
+
+<div class="product-body">
+<div class="product-name">${p.name}</div>
+
+<div class="price-current">
+₹${p.price.toLocaleString('en-IN')}
+</div>
+
+</div>
+
+</div>
+
+`).join("");
+
+}
+
+   
 
   // Bind add-to-cart buttons
   grid.querySelectorAll('.add-to-cart-btn').forEach(btn => {
@@ -333,6 +369,16 @@ showToast("Added to favorites ❤️");
 
 localStorage.setItem("em_favorites",JSON.stringify(favorites));
 renderProducts();
+
+};
+window.buyNow = function(id){
+
+cart = [{id:id,qty:1}];
+
+persistCart();
+updateCartBadge();
+
+showSection("cart");
 
 }
 
