@@ -947,3 +947,30 @@ textarea.form-input { resize: vertical; min-height: 120px; }
   .cart-item-row { grid-template-columns: 60px 1fr; }
   .remove-btn { grid-column: span 2; }
 }
+
+.fav-btn{
+position:absolute;
+top:12px;
+right:12px;
+width:34px;
+height:34px;
+border-radius:50%;
+background:rgba(0,0,0,0.6);
+color:white;
+font-size:18px;
+display:flex;
+align-items:center;
+justify-content:center;
+border:1px solid rgba(255,255,255,0.2);
+transition:0.3s;
+}
+
+.fav-btn:hover{
+background:#8B5CF6;
+}
+
+.fav-btn.active{
+background:#8B5CF6;
+}
+
+
