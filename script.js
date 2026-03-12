@@ -125,7 +125,7 @@ function showSection(name, instant = false) {
   document.querySelectorAll('.section').forEach(s => {
     s.classList.remove('active');
   });
-  i
+
   // Show target
   const target = document.getElementById('section-' + name);
   if (!target) return;
@@ -183,7 +183,9 @@ function renderProducts() {
   grid.innerHTML = PRODUCTS.map(p => `
     <div class="product-card" data-id="${p.id}">
       <div class="product-img-wrap">
-  <button class="fav-btn" onclick="toggleFavorite(${p.id})">♡</button>
+  <button class="fav-btn ${favorites.includes(p.id) ? 'active' : ''}" onclick="toggleFavorite(${p.id})">
+${favorites.includes(p.id) ? '❤️' : '♡'}
+</button>
         <img src="${p.img}" alt="${p.name}" loading="lazy" onerror="this.src='https://via.placeholder.com/400x300/141416/8B5CF6?text=${encodeURIComponent(p.name)}'"/>
         <span class="product-tag tag-${p.tag}">${p.tagLabel}</span>
       </div>
@@ -216,6 +218,16 @@ Buy Now
     </div>
   `).join('');
 }
+
+  // Bind add-to-cart buttons
+  grid.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = parseInt(btn.dataset.id);
+      addToCart(id, btn);
+    });
+  });
+}
+
 function renderFavorites(){
 
 const grid = document.getElementById("favoritesGrid");
@@ -252,14 +264,7 @@ grid.innerHTML = favProducts.map(p=>`
 
    
 
-  // Bind add-to-cart buttons
-  grid.querySelectorAll('.add-to-cart-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const id = parseInt(btn.dataset.id);
-      addToCart(id, btn);
-    });
-  });
-}
+
 
 // ── Cart Logic ────────────────────────────────────────────────────
 function addToCart(id, btn) {
