@@ -197,7 +197,17 @@ function renderProducts() {
         </ul>
       </div>
       <div class="product-footer">
-        <button class="add-to-cart-btn" data-id="${p.id}">Add to Cart</button>
+        <div class="product-buttons">
+
+<button class="add-to-cart-btn" data-id="${p.id}">
+Add to Cart
+</button>
+
+<button class="buy-now-btn" onclick="buyNow(${p.id})">
+Buy Now
+</button>
+
+</div>
       </div>
     </div>
   `).join('');
